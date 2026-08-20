@@ -15,12 +15,22 @@ public class Nimbus {
         System.out.println("Hello! I'm Nimbus.");
         System.out.println("What can I do for you?");
         System.out.println(horizontalLine);
-
+        String[] list = new String[100];
+        int index = 0;
         String input = scanner.nextLine();
         while (!input.equalsIgnoreCase("bye")) {
-            System.out.println(horizontalLine);
-            System.out.println(input);
-            System.out.println(horizontalLine);
+            if (input.equalsIgnoreCase("list")) {
+                System.out.println(horizontalLine);
+                for (int i = 0; i < index; i++) {
+                    System.out.println((i + 1) + ". " + list[i]);
+                }
+                System.out.println(horizontalLine);
+            } else {
+                list[index++] = input;
+                System.out.println(horizontalLine);
+                System.out.println("added: " + input);
+                System.out.println(horizontalLine);
+            }
             input = scanner.nextLine();
         }
         System.out.println(horizontalLine);
