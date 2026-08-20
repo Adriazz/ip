@@ -23,7 +23,6 @@ public class Nimbus {
 
         while (!input.equalsIgnoreCase("bye")) {
             System.out.println(horizontalLine);
-
             if (input.equalsIgnoreCase("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < index; i++) {
@@ -41,9 +40,39 @@ public class Nimbus {
                 task.unmarkAsDone();
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println("  " + task);
+            } else if (input.toLowerCase().startsWith("todo ")) {
+                String name = input.substring(5).trim();
+                Task newTask = new Todo(name);
+                list[index++] = newTask;
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + newTask);
+                System.out.println("Now you have " + index + " tasks in the list.");
+            } else if (input.toLowerCase().startsWith("deadline ")) {
+                String remainder = input.substring(9).trim();
+                String[] parts = remainder.split("/by", 2);
+                String name = parts[0].trim();
+                String by = parts[1].trim();
+                Task newTask = new Deadline(name, by);
+                list[index++] = newTask;
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + newTask);
+                System.out.println("Now you have " + index + " tasks in the list.");
+            } else if (input.toLowerCase().startsWith("event ")) {
+                String remainder = input.substring(6).trim();
+                String[] fromSplit = remainder.split("/from", 2);
+                String name = fromSplit[0].trim();
+                String[] toSplit = fromSplit[1].split("/to", 2);
+                String from = toSplit[0].trim();
+                String to = toSplit[1].trim();
+                Task newTask = new Event(name, from, to);
+                list[index++] = newTask;
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + newTask);
+                System.out.println("Now you have " + index + " tasks in the list.");
             } else {
                 list[index++] = new Task(input);
                 System.out.println("added: " + input);
+                System.out.println("Now you have " + index + " tasks in the list.");
             }
 
             System.out.println(horizontalLine);
