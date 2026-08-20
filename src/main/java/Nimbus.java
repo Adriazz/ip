@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Nimbus {
     public static void main(String[] args) {
@@ -16,9 +17,7 @@ public class Nimbus {
         System.out.println("Hello! I'm Nimbus.");
         System.out.println("What can I do for you?");
         System.out.println(horizontalLine);
-
-        Task[] list = new Task[100];
-        int index = 0;
+        ArrayList<Task> taskList = new ArrayList<>();
         String input = scanner.nextLine();
 
         while (!input.equalsIgnoreCase("bye")) {
@@ -26,24 +25,34 @@ public class Nimbus {
                 System.out.println(horizontalLine);
                 if (input.equalsIgnoreCase("list")) {
                     System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < index; i++) {
-                        System.out.println((i + 1) + "." + list[i]);
+                    for (int i = 0; i < taskList.size(); i++) {
+                        System.out.println((i + 1) + "." + taskList.get(i));
                     }
                 } else if (input.toLowerCase().startsWith("mark ")) {
                     int taskNumber = Integer.parseInt(input.substring(5).trim());
-                    if (taskNumber < 1 || taskNumber > index) {
+                    if (taskNumber < 1 || taskNumber > taskList.size()) {
                         throw new NimbusException("Invalid task number.");
                     }
-                    Task task = list[taskNumber - 1];
+                    Task task = taskList.get(taskNumber - 1);
                     task.markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("  " + task);
-                } else if (input.toLowerCase().startsWith("unmark ")) {
+                } else if (input.toLowerCase().startsWith("delete ")) {
                     int taskNumber = Integer.parseInt(input.substring(7).trim());
-                    if (taskNumber < 1 || taskNumber > index) {
+                    if (taskNumber < 1 || taskNumber > taskList.size()) {
                         throw new NimbusException("Invalid task number.");
                     }
-                    Task task = list[taskNumber - 1];
+                    Task task = taskList.remove(taskNumber - 1);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println("  " + task);
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                
+                } else if (input.toLowerCase().startsWith("unmark ")) {
+                    int taskNumber = Integer.parseInt(input.substring(7).trim());
+                    if (taskNumber < 1 || taskNumber > taskList.size()) {
+                        throw new NimbusException("Invalid task number.");
+                    }
+                    Task task = taskList.get(taskNumber - 1);
                     task.unmarkAsDone();
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println("  " + task);
@@ -53,10 +62,10 @@ public class Nimbus {
                         throw new NimbusException("The description of a todo cannot be empty.");
                     }
                     Task newTask = new Todo(name);
-                    list[index++] = newTask;
+                    taskList.add(newTask);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + newTask);
-                    System.out.println("Now you have " + index + " tasks in the list.");
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                 } else if (input.toLowerCase().startsWith("deadline ")) {
                     String remainder = input.substring(9).trim();
                     String[] parts = remainder.split("/by", 2);
@@ -69,10 +78,10 @@ public class Nimbus {
                     }
                     String by = parts[1].trim();
                     Task newTask = new Deadline(name, by);
-                    list[index++] = newTask;
+                    taskList.add(newTask);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + newTask);
-                    System.out.println("Now you have " + index + " tasks in the list.");
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                 } else if (input.toLowerCase().startsWith("event ")) {
                     String remainder = input.substring(6).trim();
                     String[] fromSplit = remainder.split("/from", 2);
@@ -90,10 +99,10 @@ public class Nimbus {
                     String from = toSplit[0].trim();
                     String to = toSplit[1].trim();
                     Task newTask = new Event(name, from, to);
-                    list[index++] = newTask;
+                    taskList.add(newTask);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + newTask);
-                    System.out.println("Now you have " + index + " tasks in the list.");
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                 } else {
                     throw new NimbusException("I'm sorry, but I don't know what that means.");
                 }
