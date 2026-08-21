@@ -60,7 +60,7 @@ public class Nimbus {
                         Task task = taskList.remove(taskNumber - 1);
                         System.out.println("Noted. I've removed this task:");
                         System.out.println("  " + task);
-                        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                        printTaskNumber(taskList);
                     }
                     case TODO -> {
                         String name = input.substring(5).trim();
@@ -68,10 +68,7 @@ public class Nimbus {
                             throw new NimbusException("The description of a todo cannot be empty.");
                         }
                         Task newTask = new Todo(name);
-                        taskList.add(newTask);
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println("  " + newTask);
-                        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                        addTask(taskList, newTask);
                     }
                     case DEADLINE -> {
                         String remainder = input.substring(9).trim();
@@ -85,10 +82,7 @@ public class Nimbus {
                         }
                         String by = parts[1].trim();
                         Task newTask = new Deadline(name, by);
-                        taskList.add(newTask);
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println("  " + newTask);
-                        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                        addTask(taskList, newTask);
                     }
                     case EVENT -> {
                         String remainder = input.substring(6).trim();
@@ -107,10 +101,7 @@ public class Nimbus {
                         String from = toSplit[0].trim();
                         String to = toSplit[1].trim();
                         Task newTask = new Event(name, from, to);
-                        taskList.add(newTask);
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println("  " + newTask);
-                        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                        addTask(taskList, newTask);
                     }
                     case UNKNOWN -> throw new NimbusException("I'm sorry, but I don't know what that means.");
                     case BYE -> { } // unreachable — loop exits on BYE before this runs
@@ -129,6 +120,17 @@ public class Nimbus {
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(horizontalLine);
         scanner.close();
+    }
+
+    private static void addTask(ArrayList<Task> taskList, Task newTask) {
+        taskList.add(newTask);
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + newTask);
+        printTaskNumber(taskList);
+    }
+
+    private static void printTaskNumber(ArrayList<Task> taskList) {
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
     private static Command parseCommand(String input) {
