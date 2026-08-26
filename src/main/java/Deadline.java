@@ -3,7 +3,7 @@ public class Deadline extends Task {
     private final String by;
 
     public Deadline(String name, String by) {
-        super(name);
+        super(name, TaskType.DEADLINE);
         this.by = by;
     }
 
@@ -12,7 +12,12 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toFileString() {
+        return super.toFileString() + "|" + by;
+    }
+
+    @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return super.toString() + " (by: " + by + ")";
     }
 }
