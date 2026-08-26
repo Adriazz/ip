@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -17,7 +21,18 @@ public class Nimbus {
         System.out.println("Hello! I'm Nimbus.");
         System.out.println("What can I do for you?");
         System.out.println(horizontalLine);
-        ArrayList<Task> taskList = new ArrayList<>();
+
+        //Load tasks from file
+        ArrayList<Task> taskList;
+        File file = ensureFileExists("data/tasks.txt");
+        try {
+            taskList = readArrayListFromFile(file);
+            System.out.println("Loaded " + taskList.size() + " tasks from file.");
+        } catch (NimbusException e) {
+            System.out.println(e.getMessage());
+            taskList = new ArrayList<>();
+        }
+
         String input = scanner.nextLine();
         Command command = parseCommand(input);
 
@@ -116,10 +131,52 @@ public class Nimbus {
             }
         }
 
+        // Save tasks to file
+        try {
+            writeToFile(taskList, file);
+            System.out.println("Saved " + taskList.size() + " tasks to file.");
+        } catch (NimbusException e) {
+            System.out.println(e.getMessage());
+        }
+
         System.out.println(horizontalLine);
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(horizontalLine);
         scanner.close();
+    }
+
+    private static File ensureFileExists(String path) {
+        File file = new File(path);
+        file.getParentFile().mkdirs();
+        return file;
+    }
+    private static ArrayList<Task> readArrayListFromFile(File file) throws NimbusException {
+        if (!file.exists()) {
+            return new ArrayList<>();
+        }
+        ArrayList<Task> taskList = new ArrayList<>();
+        try (Scanner fileScanner = new Scanner(file)) {
+            while (fileScanner.hasNextLine()) {
+                String line = fileScanner.nextLine();
+                Task task = Task.fromFileString(line);
+                taskList.add(task);
+            }
+        } catch (FileNotFoundException e) {
+            throw new NimbusException("File is corrupted or cannot be read, recreating file.");
+        }
+        return taskList;
+    }
+
+    private static void writeToFile(ArrayList<Task> taskList, File file) throws NimbusException {
+        try {
+            java.io.FileWriter writer = new java.io.FileWriter(file);
+            for (Task task : taskList) {
+                writer.write(task.toFileString() + System.lineSeparator());
+            }
+            writer.close();
+        } catch (IOException e) {
+            throw new NimbusException("Error writing to file: " + e.getMessage());
+        }
     }
 
     private static void addTask(ArrayList<Task> taskList, Task newTask) {

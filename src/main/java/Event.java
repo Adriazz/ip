@@ -4,7 +4,7 @@ public class Event extends Task {
     private final String to;
 
     public Event(String name, String from, String to) {
-        super(name);
+        super(name, TaskType.EVENT);
         this.from = from;
         this.to = to;
     }
@@ -18,7 +18,12 @@ public class Event extends Task {
     }
 
     @Override
+    public String toFileString() {
+        return super.toFileString() + "|" + from + "|" + to;
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return super.toString() + " (from: " + from + " to: " + to + ")";
     }
 }
