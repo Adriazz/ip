@@ -1,4 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
+
+    protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     private String name;
     private boolean isDone;
@@ -49,12 +55,12 @@ public abstract class Task {
                     break;
                 case DEADLINE:
                     String by = parts[3];
-                    task = new Deadline(name, by);
+                    task = new Deadline(name, LocalDate.parse(by));
                     break;
                 case EVENT:
                     String from = parts[3];
                     String to = parts[4];
-                    task = new Event(name, from, to);
+                    task = new Event(name, LocalDate.parse(from), LocalDate.parse(to));
                     break;
                 default:
                     throw new IllegalArgumentException("Unknown task type: " + type);
@@ -65,7 +71,7 @@ public abstract class Task {
             }
 
             return task;
-        } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
+        } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException | DateTimeParseException e) {
             throw new NimbusException("Unable to parse task from file. Recreating file...");
         }
         
