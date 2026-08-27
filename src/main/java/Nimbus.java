@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -41,83 +44,13 @@ public class Nimbus {
 
                 System.out.println(horizontalLine);
                 switch (command) {
-                    case LIST -> {
-                        System.out.println("Here are the tasks in your list:");
-                        for (int i = 0; i < taskList.size(); i++) {
-                            System.out.println((i + 1) + "." + taskList.get(i));
-                        }
-                    }
-                    case MARK -> {
-                        int taskNumber = Integer.parseInt(input.substring(5).trim());
-                        if (taskNumber < 1 || taskNumber > taskList.size()) {
-                            throw new NimbusException("Invalid task number.");
-                        }
-                        Task task = taskList.get(taskNumber - 1);
-                        task.markAsDone();
-                        System.out.println("Nice! I've marked this task as done:");
-                        System.out.println("  " + task);
-                    }
-                    case UNMARK -> {
-                        int taskNumber = Integer.parseInt(input.substring(7).trim());
-                        if (taskNumber < 1 || taskNumber > taskList.size()) {
-                            throw new NimbusException("Invalid task number.");
-                        }
-                        Task task = taskList.get(taskNumber - 1);
-                        task.unmarkAsDone();
-                        System.out.println("OK, I've marked this task as not done yet:");
-                        System.out.println("  " + task);
-                    }
-                    case DELETE -> {
-                        int taskNumber = Integer.parseInt(input.substring(7).trim());
-                        if (taskNumber < 1 || taskNumber > taskList.size()) {
-                            throw new NimbusException("Invalid task number.");
-                        }
-                        Task task = taskList.remove(taskNumber - 1);
-                        System.out.println("Noted. I've removed this task:");
-                        System.out.println("  " + task);
-                        printTaskNumber(taskList);
-                    }
-                    case TODO -> {
-                        String name = input.substring(5).trim();
-                        if (name.isEmpty()) {
-                            throw new NimbusException("The description of a todo cannot be empty.");
-                        }
-                        Task newTask = new Todo(name);
-                        addTask(taskList, newTask);
-                    }
-                    case DEADLINE -> {
-                        String remainder = input.substring(9).trim();
-                        String[] parts = remainder.split("/by", 2);
-                        String name = parts[0].trim();
-                        if (name.isEmpty()) {
-                            throw new NimbusException("The description of a deadline cannot be empty.");
-                        }
-                        if (parts.length < 2) {
-                            throw new NimbusException("The deadline must have a due date.");
-                        }
-                        String by = parts[1].trim();
-                        Task newTask = new Deadline(name, by);
-                        addTask(taskList, newTask);
-                    }
-                    case EVENT -> {
-                        String remainder = input.substring(6).trim();
-                        String[] fromSplit = remainder.split("/from", 2);
-                        String name = fromSplit[0].trim();
-                        if (name.isEmpty()) {
-                            throw new NimbusException("The description of an event cannot be empty.");
-                        }
-                        if (fromSplit.length < 2) {
-                            throw new NimbusException("The event must have a start time.");
-                        }
-                        String[] toSplit = fromSplit[1].split("/to", 2);
-                        if (toSplit.length < 2) {
-                            throw new NimbusException("The event must have an end time.");
-                        }
-                        String from = toSplit[0].trim();
-                        String to = toSplit[1].trim();
-                        Task newTask = new Event(name, from, to);
-                        addTask(taskList, newTask);
-                    }
+                    case LIST -> handleList(taskList);
+                    case MARK -> handleMark(input, taskList);
+                    case UNMARK -> handleUnmark(input, taskList);
+                    case DELETE -> handleDelete(input, taskList);
+                    case TODO -> handleTodo(input, taskList);
+                    case DEADLINE -> handleDeadline(input, taskList);
+                    case EVENT -> handleEvent(input, taskList);
                     case UNKNOWN -> throw new NimbusException("I'm sorry, but I don't know what that means.");
                     case BYE -> { } // unreachable — loop exits on BYE before this runs
                 }
@@ -143,6 +76,95 @@ public class Nimbus {
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(horizontalLine);
         scanner.close();
+    }
+
+    private static void handleList(ArrayList<Task> taskList) {
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println((i + 1) + "." + taskList.get(i));
+        }
+    }
+
+    private static void handleMark(String input, ArrayList<Task> taskList) throws NimbusException {
+        int taskNumber = Integer.parseInt(input.substring(5).trim());
+        if (taskNumber < 1 || taskNumber > taskList.size()) {
+            throw new NimbusException("Invalid task number.");
+        }
+        Task task = taskList.get(taskNumber - 1);
+        task.markAsDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("  " + task);
+    }
+
+    private static void handleUnmark(String input, ArrayList<Task> taskList) throws NimbusException {
+        int taskNumber = Integer.parseInt(input.substring(7).trim());
+        if (taskNumber < 1 || taskNumber > taskList.size()) {
+            throw new NimbusException("Invalid task number.");
+        }
+        Task task = taskList.get(taskNumber - 1);
+        task.unmarkAsDone();
+        System.out.println("OK, I've marked this task as not done yet:");
+        System.out.println("  " + task);
+    }
+
+    private static void handleDelete(String input, ArrayList<Task> taskList) throws NimbusException {
+        int taskNumber = Integer.parseInt(input.substring(7).trim());
+        if (taskNumber < 1 || taskNumber > taskList.size()) {
+            throw new NimbusException("Invalid task number.");
+        }
+        Task task = taskList.remove(taskNumber - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + task);
+        printTaskNumber(taskList);
+    }
+
+    private static void handleTodo(String input, ArrayList<Task> taskList) throws NimbusException {
+        String name = input.substring(5).trim();
+        if (name.isEmpty()) {
+            throw new NimbusException("The description of a todo cannot be empty.");
+        }
+        addTask(taskList, new Todo(name));
+    }
+
+    private static void handleDeadline(String input, ArrayList<Task> taskList) throws NimbusException {
+        String remainder = input.substring(9).trim();
+        String[] parts = remainder.split("/by", 2);
+        String name = parts[0].trim();
+        if (name.isEmpty()) {
+            throw new NimbusException("The description of a deadline cannot be empty.");
+        }
+        if (parts.length < 2) {
+            throw new NimbusException("The deadline must have a due date.");
+        }
+        String by = parts[1].trim();
+        try {
+            addTask(taskList, new Deadline(name, LocalDate.parse(by)));
+        } catch (DateTimeParseException e) {
+            throw new NimbusException("The due date must be in the format YYYY-MM-DD.");
+        }
+    }
+
+    private static void handleEvent(String input, ArrayList<Task> taskList) throws NimbusException {
+        String remainder = input.substring(6).trim();
+        String[] fromSplit = remainder.split("/from", 2);
+        String name = fromSplit[0].trim();
+        if (name.isEmpty()) {
+            throw new NimbusException("The description of an event cannot be empty.");
+        }
+        if (fromSplit.length < 2) {
+            throw new NimbusException("The event must have a start time.");
+        }
+        String[] toSplit = fromSplit[1].split("/to", 2);
+        if (toSplit.length < 2) {
+            throw new NimbusException("The event must have an end time.");
+        }
+        String from = toSplit[0].trim();
+        String to = toSplit[1].trim();
+        try {
+            addTask(taskList, new Event(name, LocalDate.parse(from), LocalDate.parse(to)));
+        } catch (DateTimeParseException e) {
+            throw new NimbusException("The event times must be in the format YYYY-MM-DD.");
+        }
     }
 
     private static File ensureFileExists(String path) {

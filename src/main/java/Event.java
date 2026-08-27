@@ -1,29 +1,31 @@
+import java.time.LocalDate;
+
 public class Event extends Task {
 
-    private final String from;
-    private final String to;
+    private final LocalDate from;
+    private final LocalDate to;
 
-    public Event(String name, String from, String to) {
+    public Event(String name, LocalDate from, LocalDate to) {
         super(name, TaskType.EVENT);
         this.from = from;
         this.to = to;
     }
 
     public String getFrom() {
-        return from;
+        return from.format(OUTPUT_FORMAT);
     }
 
     public String getTo() {
-        return to;
+        return to.format(OUTPUT_FORMAT);
     }
 
     @Override
     public String toFileString() {
-        return super.toFileString() + "|" + from + "|" + to;
+        return super.toFileString() + "|" + getFrom() + "|" + getTo();
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (from: " + from + " to: " + to + ")";
+        return super.toString() + " (from: " + getFrom() + " to: " + getTo() + ")";
     }
 }
