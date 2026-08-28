@@ -14,6 +14,12 @@ public abstract class Task {
     private boolean isDone;
     private TaskType type;
 
+    /**
+     * Constructs a Task object with a name and type.
+     * 
+     * @param name The name of the task.
+     * @param type The type of the task.
+     */
     public Task(String name, TaskType type) {
         this.name = name;
         this.type = type;
@@ -36,6 +42,11 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Formats the task into a format suitable for file writing.
+     * 
+     * @return The formatted file string.
+     */
     public String toFileString() {
         return type.getType() + "|" + (isDone ? "1" : "0") + "|" + name;
     }

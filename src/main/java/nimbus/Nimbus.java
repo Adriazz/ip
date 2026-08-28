@@ -18,11 +18,17 @@ public class Nimbus {
     private final Storage storage;
     private static final String path = "data/tasks.txt";
 
+    /**
+     * Creates a Nimbus object and initalizes the Ui and storage.
+     */
     public Nimbus() {
         this.ui = new Ui();
         this.storage = new Storage(path);
     }
 
+    /**
+     * Runs the chatbot
+     */
     public void run() {
         ui.showWelcome();
         boolean isRunning = true;
@@ -91,6 +97,12 @@ public class Nimbus {
         }
         ui.showExitMessage();
     }
+    
+    /**
+     * Entry point of the Nimbus application.
+     *
+     * @param args Command-line arguments (unused).
+     */
     public static void main(String[] args) {
         new Nimbus().run();
     }
