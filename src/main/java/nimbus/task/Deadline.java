@@ -17,7 +17,7 @@ public class Deadline extends Task {
 
     @Override
     public String toFileString() {
-        return super.toFileString() + "|" + getBy();
+        return super.toFileString() + "|" + by.toString();
     }
 
     @Override
