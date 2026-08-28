@@ -1,5 +1,12 @@
+package nimbus.parser;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import nimbus.Command;
+import nimbus.exception.NimbusException;
+import nimbus.task.Deadline;
+import nimbus.task.Event;
+import nimbus.task.Todo;
 
 public class Parser {
 

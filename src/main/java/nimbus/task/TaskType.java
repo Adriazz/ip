@@ -1,3 +1,4 @@
+package nimbus.task;
 public enum TaskType {
     TODO("T"), DEADLINE("D"), EVENT("E");
 

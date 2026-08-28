@@ -1,3 +1,16 @@
+package nimbus;
+
+import nimbus.ui.Ui;
+import nimbus.storage.Storage;
+import nimbus.task.Task;
+import nimbus.task.TaskList;
+import nimbus.exception.NimbusException;
+import nimbus.parser.Command;
+import nimbus.parser.Parser;
+import nimbus.task.Deadline;
+import nimbus.task.Event;
+import nimbus.task.Todo;
+
 public class Nimbus {
 
     private final Ui ui;
