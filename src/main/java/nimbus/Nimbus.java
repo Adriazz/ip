@@ -81,6 +81,11 @@ public class Nimbus {
                     case BYE -> {
                         isRunning = false;
                     }
+                    case FIND -> {
+                        String keyword = Parser.parseArguments(input);
+                        TaskList matches = taskList.findTask(keyword);
+                        ui.printTaskList(matches);
+                    }
                     case UNKNOWN -> {
                         throw new NimbusException("I'm sorry, I don't know what that means.");
                     }
