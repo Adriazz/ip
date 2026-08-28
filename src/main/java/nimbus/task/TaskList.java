@@ -1,4 +1,5 @@
 package nimbus.task;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +57,22 @@ public class TaskList {
 
     public int getSize() {
         return tasks.size();
+    }
+
+    /**
+     * Returns a TaskList with a tasks with names matching the keyword
+     * 
+     * @param keyword
+     * @return A TaskList with tasks that match the keyword
+     */
+    public TaskList findTask(String keyword) {
+        List<Task> matches = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getName().contains(keyword)) {
+                matches.add(task);
+            }
+        }
+        return new TaskList(matches);
     }
 
     @Override

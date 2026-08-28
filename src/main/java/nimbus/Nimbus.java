@@ -27,7 +27,7 @@ public class Nimbus {
         ui.showWelcome();
         boolean isRunning = true;
 
-        try{
+        try {
             this.taskList = new TaskList(storage.readFromFile());
             ui.showTasksLoaded(taskList.getSize());
         } catch (NimbusException e) {
@@ -75,6 +75,11 @@ public class Nimbus {
                     case BYE -> {
                         isRunning = false;
                     }
+                    case FIND -> {
+                        String keyword = Parser.parseArguments(input);
+                        TaskList matches = taskList.findTask(keyword);
+                        ui.printTaskList(matches);
+                    }
                     case UNKNOWN -> {
                         throw new NimbusException("I'm sorry, I don't know what that means.");
                     }
@@ -91,6 +96,7 @@ public class Nimbus {
         }
         ui.showExitMessage();
     }
+
     public static void main(String[] args) {
         new Nimbus().run();
     }
