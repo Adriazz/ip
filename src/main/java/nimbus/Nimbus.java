@@ -33,7 +33,7 @@ public class Nimbus {
         ui.showWelcome();
         boolean isRunning = true;
 
-        try{
+        try {
             this.taskList = new TaskList(storage.readFromFile());
             ui.showTasksLoaded(taskList.getSize());
         } catch (NimbusException e) {
@@ -97,7 +97,7 @@ public class Nimbus {
         }
         ui.showExitMessage();
     }
-    
+
     /**
      * Entry point of the Nimbus application.
      *

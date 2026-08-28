@@ -65,9 +65,10 @@ public class Ui {
     }
 
     /**
-     * Prints confirmation that a task was added, followed by the updated task count.
+     * Prints confirmation that a task was added, followed by the updated task
+     * count.
      *
-     * @param task The task that was added.
+     * @param task     The task that was added.
      * @param taskList The task list the task was added to.
      */
     public void printAddTask(Task task, TaskList taskList) {
@@ -79,9 +80,10 @@ public class Ui {
     }
 
     /**
-     * Prints confirmation that a task was deleted, followed by the updated task count.
+     * Prints confirmation that a task was deleted, followed by the updated task
+     * count.
      *
-     * @param task The task that was removed.
+     * @param task     The task that was removed.
      * @param taskList The task list the task was removed from.
      */
     public void printDeleteTask(Task task, TaskList taskList) {

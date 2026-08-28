@@ -1,4 +1,5 @@
 package nimbus.exception;
+
 public class NimbusException extends Exception {
 
     /**
