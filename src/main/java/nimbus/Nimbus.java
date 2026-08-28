@@ -27,7 +27,7 @@ public class Nimbus {
         ui.showWelcome();
         boolean isRunning = true;
 
-        try{
+        try {
             this.taskList = new TaskList(storage.readFromFile());
             ui.showTasksLoaded(taskList.getSize());
         } catch (NimbusException e) {
@@ -91,6 +91,7 @@ public class Nimbus {
         }
         ui.showExitMessage();
     }
+
     public static void main(String[] args) {
         new Nimbus().run();
     }

@@ -1,4 +1,5 @@
 package nimbus.ui;
+
 import java.util.Scanner;
 
 import nimbus.exception.NimbusException;
@@ -14,7 +15,7 @@ public class Ui {
             + "#  ##    #    #   #  #   #  #   #     #  \n"
             + "#   #  #####  #   #  ####    ###   ####  \n";
     private final Scanner scanner;
-    
+
     public Ui() {
         this.scanner = new Scanner(System.in);
     }
@@ -22,7 +23,7 @@ public class Ui {
     public String readCommand() {
         return scanner.nextLine();
     }
-    
+
     public void showWelcome() {
         System.out.println(horizontalLine);
         System.out.println(banner);

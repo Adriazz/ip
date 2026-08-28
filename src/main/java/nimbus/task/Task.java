@@ -1,4 +1,5 @@
 package nimbus.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -31,7 +32,7 @@ public abstract class Task {
     public void markAsDone() {
         this.isDone = true;
     }
-    
+
     public void unmarkAsDone() {
         this.isDone = false;
     }
@@ -78,6 +79,6 @@ public abstract class Task {
         } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException | DateTimeParseException e) {
             throw new NimbusException("Unable to parse task from file. Recreating file...");
         }
-        
+
     }
 }
