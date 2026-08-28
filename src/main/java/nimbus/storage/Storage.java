@@ -15,10 +15,21 @@ public class Storage {
 
     public final String filePath;
 
+    /**
+     * Constructs a new Storage object that can read files from the specified filePath.
+     * 
+     * @param filePath the path to read the file from.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads from the file and constructs a List of tasks.
+     * 
+     * @return The list of tasks read from the file.
+     * @throws NimbusException If file is corrupted.
+     */
     public List<Task> readFromFile() throws NimbusException {
         File file = new File(filePath);
         file.getParentFile().mkdirs(); // Create parent directories if they don't exist
@@ -38,6 +49,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes the new taskList into the file
+     * 
+     * @param taskList List of tasks to write.
+     * @throws NimbusException If there is any error during the writing process.s
+     */
     public void writeToFile(List<Task> taskList) throws NimbusException {
         File file = new File(filePath);
         try (FileWriter writer = new FileWriter(file)) {
