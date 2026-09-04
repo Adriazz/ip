@@ -5,6 +5,9 @@ import java.util.List;
 
 import nimbus.exception.NimbusException;
 
+/**
+ * Represents a list of tasks in the Nimbus application.
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;
@@ -18,7 +21,7 @@ public class TaskList {
 
     /**
      * Constructs a TaskList object from the provided list of Tasks.
-     * 
+     *
      * @param tasks the list of tasks.
      */
     public TaskList(List<Task> tasks) {
@@ -27,7 +30,7 @@ public class TaskList {
 
     /**
      * Adds a task to the list of tasks.
-     * 
+     *
      * @param task The task to add.
      */
     public void addTask(Task task) {
@@ -36,7 +39,7 @@ public class TaskList {
 
     /**
      * Returns the task at the given index.
-     * 
+     *
      * @param index Index of the task in the list.
      * @return The task at the index.
      * @throws NimbusException If there is no task at the specified index.
@@ -54,7 +57,7 @@ public class TaskList {
 
     /**
      * Removes and returns the task at the given index.
-     * 
+     *
      * @param index The index of the task.
      * @return The removed task.
      * @throws NimbusException If there is no task at the specified index.
@@ -68,10 +71,11 @@ public class TaskList {
 
     /**
      * Marks the task at the index as completed.
-     * 
+     *
      * @param index The index of the task.
      * @return The completed task.
-     * @throws NimbusException If the task is already completed or if there is no task at that index.
+     * @throws NimbusException If the task is already completed or if there is no
+     *                         task at that index.
      */
     public Task markTask(int index) throws NimbusException {
         if (index < 0 || index >= tasks.size()) {
@@ -87,10 +91,11 @@ public class TaskList {
 
     /**
      * Unmarks the task as incomplete and returns it.
-     * 
+     *
      * @param index The index of the task.
      * @return The unmarked task.
-     * @throws NimbusException If the task is already incomplete or if there is no task at that index.
+     * @throws NimbusException If the task is already incomplete or if there is no
+     *                         task at that index.
      */
     public Task unmarkTask(int index) throws NimbusException {
         if (index < 0 || index >= tasks.size()) {
@@ -113,7 +118,7 @@ public class TaskList {
 
     /**
      * Returns a TaskList with a tasks with names matching the keyword
-     * 
+     *
      * @param keyword
      * @return A TaskList with tasks that match the keyword
      */

@@ -6,10 +6,14 @@ import nimbus.exception.NimbusException;
 import nimbus.task.Task;
 import nimbus.task.TaskList;
 
+/**
+ * Represents the user interface of the Nimbus application.
+ * It is responsible for reading user input and displaying messages to the user.
+ */
 public class Ui {
 
-    public static String horizontalLine = "____________________________________________________________";
-    public static String banner = "#   #  #####  #   #  ####   #   #   ####\n"
+    public static final String HORIZONTAL_LINE = "____________________________________________________________";
+    public static final String BANNER = "#   #  #####  #   #  ####   #   #   ####\n"
             + "##  #    #    ## ##  #   #  #   #  #     \n"
             + "# # #    #    # # #  ####   #   #   ###  \n"
             + "#  ##    #    #   #  #   #  #   #     #  \n"
@@ -36,20 +40,20 @@ public class Ui {
      * Prints the welcome banner and greeting shown at startup.
      */
     public void showWelcome() {
-        System.out.println(horizontalLine);
-        System.out.println(banner);
+        System.out.println(HORIZONTAL_LINE);
+        System.out.println(BANNER);
         System.out.println("Hello! I'm Nimbus.");
         System.out.println("What can I do for you?");
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
      * Prints the farewell message shown when the application exits.
      */
     public void showExitMessage() {
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
@@ -58,10 +62,10 @@ public class Ui {
      * @param taskList The task list to display.
      */
     public void printTaskList(TaskList taskList) {
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
         System.out.println("Here are the tasks in your list:");
         System.out.print(taskList.toString());
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
@@ -72,11 +76,11 @@ public class Ui {
      * @param taskList The task list the task was added to.
      */
     public void printAddTask(Task task, TaskList taskList) {
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
         System.out.println("Got it. I've added this task:");
         System.out.println(task.toString());
         printTaskSize(taskList);
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
@@ -87,11 +91,11 @@ public class Ui {
      * @param taskList The task list the task was removed from.
      */
     public void printDeleteTask(Task task, TaskList taskList) {
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
         System.out.println("Noted. I've removed this task:");
         System.out.println(task.toString());
         printTaskSize(taskList);
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
@@ -100,10 +104,10 @@ public class Ui {
      * @param task The task that was marked done.
      */
     public void printMarkTask(Task task) {
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(task.toString());
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
@@ -112,10 +116,10 @@ public class Ui {
      * @param task The task that was marked not done.
      */
     public void printUnmarkTask(Task task) {
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println(task.toString());
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
@@ -133,9 +137,9 @@ public class Ui {
      * @param taskCount The number of tasks loaded.
      */
     public void showTasksLoaded(int taskCount) {
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
         System.out.println("Successfully loaded " + taskCount + " tasks from file.");
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
@@ -144,9 +148,9 @@ public class Ui {
      * @param taskCount The number of tasks saved.
      */
     public void showTasksSaved(int taskCount) {
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
         System.out.println("Successfully saved " + taskCount + " tasks to file.");
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
@@ -155,8 +159,8 @@ public class Ui {
      * @param e The exception whose message is displayed to the user.
      */
     public void printError(NimbusException e) {
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
         System.out.println(e.getMessage());
-        System.out.println(horizontalLine);
+        System.out.println(HORIZONTAL_LINE);
     }
 }

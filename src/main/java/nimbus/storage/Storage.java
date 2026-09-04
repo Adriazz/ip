@@ -11,13 +11,18 @@ import java.util.Scanner;
 import nimbus.exception.NimbusException;
 import nimbus.task.Task;
 
+/**
+ * Represents the storage of the Nimbus application.
+ * It is responsible for reading and writing tasks to a file.
+ */
 public class Storage {
 
     public final String filePath;
 
     /**
-     * Constructs a new Storage object that can read files from the specified filePath.
-     * 
+     * Constructs a new Storage object that can read files from the specified
+     * filePath.
+     *
      * @param filePath the path to read the file from.
      */
     public Storage(String filePath) {
@@ -26,7 +31,7 @@ public class Storage {
 
     /**
      * Reads from the file and constructs a List of tasks.
-     * 
+     *
      * @return The list of tasks read from the file.
      * @throws NimbusException If file is corrupted.
      */
@@ -51,7 +56,7 @@ public class Storage {
 
     /**
      * Writes the new taskList into the file
-     * 
+     *
      * @param taskList List of tasks to write.
      * @throws NimbusException If there is any error during the writing process.s
      */

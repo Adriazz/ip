@@ -1,29 +1,32 @@
 package nimbus;
 
-import nimbus.ui.Ui;
-import nimbus.storage.Storage;
-import nimbus.task.Task;
-import nimbus.task.TaskList;
 import nimbus.exception.NimbusException;
 import nimbus.parser.Command;
 import nimbus.parser.Parser;
+import nimbus.storage.Storage;
 import nimbus.task.Deadline;
 import nimbus.task.Event;
+import nimbus.task.Task;
+import nimbus.task.TaskList;
 import nimbus.task.Todo;
+import nimbus.ui.Ui;
 
+/**
+ * The Nimbus chatbot.
+ */
 public class Nimbus {
 
+    private static final String PATH = "data/tasks.txt";
     private final Ui ui;
     private TaskList taskList;
     private final Storage storage;
-    private static final String path = "data/tasks.txt";
 
     /**
      * Creates a Nimbus object and initalizes the Ui and storage.
      */
     public Nimbus() {
         this.ui = new Ui();
-        this.storage = new Storage(path);
+        this.storage = new Storage(PATH);
     }
 
     /**
@@ -87,6 +90,9 @@ public class Nimbus {
                         ui.printTaskList(matches);
                     }
                     case UNKNOWN -> {
+                        throw new NimbusException("I'm sorry, I don't know what that means.");
+                    }
+                    default -> {
                         throw new NimbusException("I'm sorry, I don't know what that means.");
                     }
                 }

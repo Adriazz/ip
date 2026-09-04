@@ -1,11 +1,11 @@
 package nimbus.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TaskListTest{
-    
+import org.junit.jupiter.api.Test;
+
+public class TaskListTest {
+
     @Test
     public void addTask_addsTaskToList() throws Exception {
         TaskList taskList = new TaskList();

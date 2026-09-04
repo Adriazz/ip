@@ -1,12 +1,15 @@
 package nimbus.task;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import nimbus.exception.NimbusException;
 
-import java.time.format.DateTimeFormatter;
-
+/**
+ * Represents a task in the Nimbus application.
+ * It can be of type TODO, DEADLINE, or EVENT.
+ */
 public abstract class Task {
 
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
@@ -17,7 +20,7 @@ public abstract class Task {
 
     /**
      * Constructs a Task object with a name and type.
-     * 
+     *
      * @param name The name of the task.
      * @param type The type of the task.
      */
@@ -45,7 +48,7 @@ public abstract class Task {
 
     /**
      * Formats the task into a format suitable for file writing.
-     * 
+     *
      * @return The formatted file string.
      */
     public String toFileString() {
@@ -57,6 +60,13 @@ public abstract class Task {
         return "[" + type.getType() + "] " + (isDone ? "[X] " : "[ ] ") + name;
     }
 
+    /**
+     * Constructs a Task object from a formatted file string.
+     *
+     * @param fileString The formatted file string.
+     * @return The constructed Task object.
+     * @throws NimbusException If the file string is corrupted or cannot be parsed.
+     */
     public static Task fromFileString(String fileString) throws NimbusException {
         try {
             String[] parts = fileString.split("\\|");

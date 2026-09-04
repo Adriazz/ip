@@ -1,5 +1,8 @@
 package nimbus.task;
 
+/**
+ * Represents the different types of tasks in the Nimbus application.
+ */
 public enum TaskType {
     TODO("T"), DEADLINE("D"), EVENT("E");
 

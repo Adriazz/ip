@@ -2,6 +2,9 @@ package nimbus.task;
 
 import java.time.LocalDate;
 
+/**
+ * Represents an Event task in the Nimbus application.
+ */
 public class Event extends Task {
 
     private final LocalDate from;
@@ -9,10 +12,10 @@ public class Event extends Task {
 
     /**
      * Constructs an Event object, with a name, from date and end date.
-     * 
+     *
      * @param name The name of the event.
      * @param from The date the event starts.
-     * @param to The date the event ends.
+     * @param to   The date the event ends.
      */
     public Event(String name, LocalDate from, LocalDate to) {
         super(name, TaskType.EVENT);
@@ -27,7 +30,7 @@ public class Event extends Task {
     public String getTo() {
         return to.format(OUTPUT_FORMAT);
     }
-    
+
     /**
      * {@inheritDoc}
      */

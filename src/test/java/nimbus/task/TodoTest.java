@@ -21,7 +21,8 @@ public class TodoTest {
 
     @Test
     public void toString_unmarkedAfterUnmark_showsEmptyBrackets() {
-        // Covers the unmark path: mark then unmark should return to the original format.
+        // Covers the unmark path: mark then unmark should return to the original
+        // format.
         Todo todo = new Todo("read book");
         todo.markAsDone();
         todo.unmarkAsDone();

@@ -8,11 +8,14 @@ import nimbus.task.Deadline;
 import nimbus.task.Event;
 import nimbus.task.Todo;
 
+/**
+ * Parser to help with parsing commands.
+ */
 public class Parser {
-    
+
     /**
      * Parses the command from the user input.
-     * 
+     *
      * @param input the user input.
      * @return the corresponding command.
      * @throws NimbusException if the command is not recognized.
@@ -28,7 +31,7 @@ public class Parser {
 
     /**
      * Parses the arguments for a todo command.
-     * 
+     *
      * @param arguments the arguments for the todo command.
      * @return the parsed todo task.
      * @throws NimbusException if the arguments are invalid.
@@ -43,7 +46,7 @@ public class Parser {
 
     /**
      * Parses the arguments for a deadline command.
-     * 
+     *
      * @param arguments the arguments for the deadline command.
      * @return the parsed deadline task.
      * @throws NimbusException if the arguments are invalid.
@@ -67,7 +70,7 @@ public class Parser {
 
     /**
      * Parses the arguments for an event command.
-     * 
+     *
      * @param arguments the arguments for the event command.
      * @return the parsed event task.
      * @throws NimbusException if the arguments are invalid.
@@ -96,7 +99,7 @@ public class Parser {
 
     /**
      * Parses the index from the arguments.
-     * 
+     *
      * @param arguments the arguments containing the index.
      * @return the parsed index.
      * @throws NimbusException if the index is invalid.
@@ -111,7 +114,7 @@ public class Parser {
 
     /**
      * Parses the arguments from the user input.
-     * 
+     *
      * @param input the user input.
      * @return the arguments part of the input.
      */
