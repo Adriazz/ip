@@ -85,6 +85,7 @@ public class Nimbus {
 
         try {
             commandType = Parser.parseCommand(input);
+            assert commandType != null : "Parser.parseCommand should never return null";
             String arguments = Parser.parseArguments(input);
             String response;
             switch (commandType) {
@@ -171,6 +172,7 @@ public class Nimbus {
     private TaskList loadTaskList(boolean announce) {
         try {
             TaskList loaded = new TaskList(storage.readFromFile());
+            assert loaded != null : "Storage.readFromFile should never return null";
             if (announce) {
                 ui.showTasksLoaded(loaded.getSize());
             }
