@@ -70,36 +70,35 @@ public abstract class Task {
     public static Task fromFileString(String fileString) throws NimbusException {
         try {
             String[] parts = fileString.split("\\|");
-            TaskType type = TaskType.fromString(parts[0]);
-            boolean isDone = parts[1].equals("1");
-            String name = parts[2];
-
-            Task task;
-            switch (type) {
-                case TODO:
-                    task = new Todo(name);
-                    break;
-                case DEADLINE:
-                    String by = parts[3];
-                    task = new Deadline(name, LocalDate.parse(by));
-                    break;
-                case EVENT:
-                    String from = parts[3];
-                    String to = parts[4];
-                    task = new Event(name, LocalDate.parse(from), LocalDate.parse(to));
-                    break;
-                default:
-                    throw new IllegalArgumentException("Unknown task type: " + type);
-            }
-
-            if (isDone) {
-                task.markAsDone();
-            }
-
+            Task task = createTaskFromParts(parts);
+            applyDoneStatus(task, parts[1].equals("1"));
             return task;
         } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException | DateTimeParseException e) {
             throw new NimbusException("Unable to parse task from file. Recreating file...");
         }
+    }
 
+    private static Task createTaskFromParts(String[] parts) {
+        TaskType type = TaskType.fromString(parts[0]);
+        String name = parts[2];
+        switch (type) {
+            case TODO:
+                return new Todo(name);
+            case DEADLINE:
+                String by = parts[3];
+                return new Deadline(name, LocalDate.parse(by));
+            case EVENT:
+                String from = parts[3];
+                String to = parts[4];
+                return new Event(name, LocalDate.parse(from), LocalDate.parse(to));
+            default:
+                throw new IllegalArgumentException("Unknown task type: " + type);
+        }
+    }
+
+    private static void applyDoneStatus(Task task, boolean isDone) {
+        if (isDone) {
+            task.markAsDone();
+        }
     }
 }

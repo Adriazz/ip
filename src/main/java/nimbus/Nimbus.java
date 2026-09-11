@@ -89,36 +89,12 @@ public class Nimbus {
             String response;
             switch (commandType) {
                 case LIST -> response = ui.formatTaskList(taskList);
-                case MARK -> {
-                    int taskNumber = Parser.parseIndex(arguments);
-                    taskList.markTask(taskNumber);
-                    response = ui.formatMarkTask(taskList.getTask(taskNumber));
-                }
-                case UNMARK -> {
-                    int taskNumber = Parser.parseIndex(arguments);
-                    taskList.unmarkTask(taskNumber);
-                    response = ui.formatUnmarkTask(taskList.getTask(taskNumber));
-                }
-                case DELETE -> {
-                    int taskNumber = Parser.parseIndex(arguments);
-                    Task deletedTask = taskList.removeTask(taskNumber);
-                    response = ui.formatDeleteTask(deletedTask, taskList);
-                }
-                case TODO -> {
-                    Todo todo = Parser.parseTodo(arguments);
-                    taskList.addTask(todo);
-                    response = ui.formatAddTask(todo, taskList);
-                }
-                case DEADLINE -> {
-                    Deadline deadline = Parser.parseDeadline(arguments);
-                    taskList.addTask(deadline);
-                    response = ui.formatAddTask(deadline, taskList);
-                }
-                case EVENT -> {
-                    Event event = Parser.parseEvent(arguments);
-                    taskList.addTask(event);
-                    response = ui.formatAddTask(event, taskList);
-                }
+                case MARK -> response = handleMarkCommand(arguments);
+                case UNMARK -> response = handleUnmarkCommand(arguments);
+                case DELETE -> response = handleDeleteCommand(arguments);
+                case TODO -> response = handleTodoCommand(arguments);
+                case DEADLINE -> response = handleDeadlineCommand(arguments);
+                case EVENT -> response = handleEventCommand(arguments);
                 case BYE -> {
                     saveTaskList();
                     response = ui.formatExitMessage();
@@ -137,6 +113,91 @@ public class Nimbus {
             this.isError = true;
             return ui.formatError(e);
         }
+    }
+
+    /**
+     * Marks the task as completed and returns it.
+     *
+     * @param arguments The arguments containing the index of the task to mark.
+     * @return The formatted message for the marked task.
+     * @throws NimbusException If the task is already completed or if there is no
+     *                         task at that index.
+     */
+    public String handleMarkCommand(String arguments) throws NimbusException {
+        int taskNumber = Parser.parseIndex(arguments);
+        taskList.markTask(taskNumber);
+        return ui.formatMarkTask(taskList.getTask(taskNumber));
+
+    }
+
+    /**
+     * Unmarks the task as not completed and returns it.
+     *
+     * @param arguments The arguments containing the index of the task to unmark.
+     * @return The formatted message for the unmarked task.
+     * @throws NimbusException If there is no task at that index.
+     */
+    public String handleUnmarkCommand(String arguments) throws NimbusException {
+        int taskNumber = Parser.parseIndex(arguments);
+        taskList.unmarkTask(taskNumber);
+        return ui.formatUnmarkTask(taskList.getTask(taskNumber));
+    }
+
+    /**
+     * Deletes the task at the given index and returns it.
+     *
+     * @param arguments The arguments containing the index of the task to delete.
+     * @return The formatted message for the deleted task.
+     * @throws NimbusException If there is no task at that index.
+     */
+    public String handleDeleteCommand(String arguments) throws NimbusException {
+        int taskNumber = Parser.parseIndex(arguments);
+        Task deletedTask = taskList.removeTask(taskNumber);
+        return ui.formatDeleteTask(deletedTask, taskList);
+    }
+
+    /**
+     * Handles the "todo" command by parsing the arguments, creating a Todo task,
+     * adding it to the task list, and returning the formatted message.
+     *
+     * @param arguments The arguments for the "todo" command.
+     * @return The formatted message for the added Todo task.
+     * @throws NimbusException If there is an error in parsing or adding the task.
+     */
+    public String handleTodoCommand(String arguments) throws NimbusException {
+        Todo todo = Parser.parseTodo(arguments);
+        taskList.addTask(todo);
+        return ui.formatAddTask(todo, taskList);
+    }
+
+    /**
+     * Handles the "deadline" command by parsing the arguments, creating a Deadline
+     * task,
+     * adding it to the task list, and returning the formatted message.
+     *
+     * @param arguments The arguments for the "deadline" command.
+     * @return The formatted message for the added Deadline task.
+     * @throws NimbusException If there is an error in parsing or adding the task.
+     */
+    public String handleDeadlineCommand(String arguments) throws NimbusException {
+        Deadline deadline = Parser.parseDeadline(arguments);
+        taskList.addTask(deadline);
+        return ui.formatAddTask(deadline, taskList);
+    }
+
+    /**
+     * Handles the "event" command by parsing the arguments, creating an Event
+     * task,
+     * adding it to the task list, and returning the formatted message.
+     *
+     * @param arguments The arguments for the "event" command.
+     * @return The formatted message for the added Event task.
+     * @throws NimbusException If there is an error in parsing or adding the task.
+     */
+    public String handleEventCommand(String arguments) throws NimbusException {
+        Event event = Parser.parseEvent(arguments);
+        taskList.addTask(event);
+        return ui.formatAddTask(event, taskList);
     }
 
     /**
