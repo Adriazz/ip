@@ -25,6 +25,7 @@ public class TaskList {
      * @param tasks the list of tasks.
      */
     public TaskList(List<Task> tasks) {
+        assert tasks != null : "Task list cannot be null";
         this.tasks = new ArrayList<>(tasks);
     }
 

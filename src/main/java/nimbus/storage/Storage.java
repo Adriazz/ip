@@ -26,6 +26,7 @@ public class Storage {
      * @param filePath the path to read the file from.
      */
     public Storage(String filePath) {
+        assert filePath != null : "File path cannot be null";
         this.filePath = filePath;
     }
 
