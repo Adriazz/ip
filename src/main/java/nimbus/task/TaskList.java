@@ -46,9 +46,7 @@ public class TaskList {
      * @throws NimbusException If there is no task at the specified index.
      */
     public Task getTask(int index) throws NimbusException {
-        if (index < 0 || index >= tasks.size()) {
-            throw new NimbusException("Invalid task index.");
-        }
+        requireValidIndex(index);
         return tasks.get(index);
     }
 
@@ -64,9 +62,7 @@ public class TaskList {
      * @throws NimbusException If there is no task at the specified index.
      */
     public Task removeTask(int index) throws NimbusException {
-        if (index < 0 || index >= tasks.size()) {
-            throw new NimbusException("Invalid task index.");
-        }
+        requireValidIndex(index);
         return tasks.remove(index);
     }
 
@@ -79,9 +75,7 @@ public class TaskList {
      *                         task at that index.
      */
     public Task markTask(int index) throws NimbusException {
-        if (index < 0 || index >= tasks.size()) {
-            throw new NimbusException("Invalid task index.");
-        }
+        requireValidIndex(index);
         Task task = tasks.get(index);
         if (task.isDone()) {
             throw new NimbusException("You have already completed the task!");
@@ -99,9 +93,7 @@ public class TaskList {
      *                         task at that index.
      */
     public Task unmarkTask(int index) throws NimbusException {
-        if (index < 0 || index >= tasks.size()) {
-            throw new NimbusException("Invalid task index.");
-        }
+        requireValidIndex(index);
         Task task = tasks.get(index);
         if (!task.isDone()) {
             throw new NimbusException("Your task is already incomplete!");
@@ -115,6 +107,18 @@ public class TaskList {
      */
     public int getSize() {
         return tasks.size();
+    }
+
+    /**
+     * Checks if the provided index is valid for the task list.
+     *
+     * @param index The index to check.
+     * @throws NimbusException If the index is invalid.
+     */
+    private void requireValidIndex(int index) throws NimbusException {
+        if (index < 0 || index >= tasks.size()) {
+            throw new NimbusException("Invalid task index.");
+        }
     }
 
     /**
