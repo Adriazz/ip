@@ -3,6 +3,7 @@ package nimbus.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 
 import nimbus.exception.NimbusException;
 
@@ -100,5 +101,26 @@ public abstract class Task {
         if (isDone) {
             task.markAsDone();
         }
+    }
+
+    /**
+     * Checks if this task is equal to another object.
+     *
+     * @param obj The object to compare with.
+     * @return true if the other object is a Task with the same name and type, false
+     *         otherwise.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Task)) {
+            return false;
+        }
+        Task other = (Task) obj;
+        return this.name.equals(other.name) && this.type == other.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, type);
     }
 }

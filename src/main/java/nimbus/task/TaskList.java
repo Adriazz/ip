@@ -34,7 +34,10 @@ public class TaskList {
      *
      * @param task The task to add.
      */
-    public void addTask(Task task) {
+    public void addTask(Task task) throws NimbusException {
+        if (containsDuplicate(task)) {
+            throw new NimbusException("Duplicate task detected.");
+        }
         tasks.add(task);
     }
 
@@ -135,6 +138,15 @@ public class TaskList {
             }
         }
         return new TaskList(matches);
+    }
+
+    private boolean containsDuplicate(Task task) {
+        for (Task existingTask : tasks) {
+            if (existingTask.equals(task)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
