@@ -31,7 +31,7 @@ Nimbus is a **desktop chatbot for managing your tasks**, with a graphical chat-s
 
 On launch, Nimbus greets you in the chat window with:
 
-> Whoosh! I'm Nimbus.
+> Whoosh! I'm Nimbus.<br>
 > What can I do for you?
 
 --------------------------------------------------------------------------------------------------------------------
@@ -52,8 +52,8 @@ Adds a simple task with no date or time attached to Nimbus's task list.
 You type: `todo return book`
 
 Nimbus replies:
-> Whoosh! Got it. I've added this task:
-> [T][ ] return book
+> Whoosh! Got it. I've added this task:<br>
+> [T][ ] return book<br>
 > Whoosh! Now you have 1 tasks in the list.
 
 ### Adding a deadline: `deadline`
@@ -63,8 +63,8 @@ Adds a task that needs to be done by a specific date.
 You type: `deadline submit report /by 2026-09-30`
 
 Nimbus replies:
-> Whoosh! Got it. I've added this task:
-> [D][ ] submit report (by: Sep 30 2026)
+> Whoosh! Got it. I've added this task:<br>
+> [D][ ] submit report (by: Sep 30 2026)<br>
 > Whoosh! Now you have 2 tasks in the list.
 
 ### Adding an event: `event`
@@ -74,8 +74,8 @@ Adds a task that starts and ends on specific dates.
 You type: `event project meeting /from 2026-10-01 /to 2026-10-02`
 
 Nimbus replies:
-> Whoosh! Got it. I've added this task:
-> [E][ ] project meeting (from: Oct 01 2026 to: Oct 02 2026)
+> Whoosh! Got it. I've added this task:<br>
+> [E][ ] project meeting (from: Oct 01 2026 to: Oct 02 2026)<br>
 > Whoosh! Now you have 3 tasks in the list.
 
 ### Listing all tasks: `list`
@@ -85,9 +85,9 @@ Shows a list of all tasks currently in Nimbus, in the order they were added.
 You type: `list`
 
 Nimbus replies:
-> Whoosh! Here are the tasks in your list:
-> 1. [T][ ] return book
-> 2. [D][ ] submit report (by: Sep 30 2026)
+> Whoosh! Here are the tasks in your list:<br>
+> 1. [T][ ] return book<br>
+> 2. [D][ ] submit report (by: Sep 30 2026)<br>
 > 3. [E][ ] project meeting (from: Oct 01 2026 to: Oct 02 2026)
 
 ### Marking a task as done: `mark`
@@ -97,7 +97,7 @@ Marks the specified task as done.
 You type: `mark 1`
 
 Nimbus replies:
-> Whoosh! I've marked this task as done:
+> Whoosh! I've marked this task as done:<br>
 > [T][X] return book
 
 ### Unmarking a task: `unmark`
@@ -107,7 +107,7 @@ Marks the specified task as not done.
 You type: `unmark 1`
 
 Nimbus replies:
-> Whoosh! I've marked this task as not done yet:
+> Whoosh! I've marked this task as not done yet:<br>
 > [T][ ] return book
 
 ### Finding tasks: `find`
@@ -117,7 +117,7 @@ Finds tasks whose description contains the given keyword (case-insensitive).
 You type: `find report`
 
 Nimbus replies:
-> Whoosh! Here are the tasks in your list:
+> Whoosh! Here are the tasks in your list:<br>
 > 1. [D][ ] submit report (by: Sep 30 2026)
 
 ### Deleting a task: `delete`
@@ -127,8 +127,8 @@ Deletes the specified task from Nimbus.
 You type: `delete 3`
 
 Nimbus replies:
-> Whoosh! I've removed this task:
-> [E][ ] project meeting (from: Oct 01 2026 to: Oct 02 2026)
+> Whoosh! I've removed this task:<br>
+> [E][ ] project meeting (from: Oct 01 2026 to: Oct 02 2026)<br>
 > Whoosh! Now you have 2 tasks in the list.
 
 ### Exiting the program: `bye`
