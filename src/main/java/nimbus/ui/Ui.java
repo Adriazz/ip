@@ -54,7 +54,7 @@ public class Ui {
      * @return The welcome message text.
      */
     public String formatWelcome() {
-        return "Hello! I'm Nimbus.\nWhat can I do for you?";
+        return "Whoosh! I'm Nimbus.\nWhat can I do for you?";
     }
 
     /**
@@ -63,7 +63,7 @@ public class Ui {
      * @return The farewell message text.
      */
     public String formatExitMessage() {
-        return "Bye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon! Whoosh!";
     }
 
     /**
@@ -73,7 +73,7 @@ public class Ui {
      * @return The formatted task list text.
      */
     public String formatTaskList(TaskList taskList) {
-        return "Here are the tasks in your list:\n" + taskList.toString();
+        return "Whoosh! Here are the tasks in your list:\n" + taskList.toString();
     }
 
     /**
@@ -85,7 +85,7 @@ public class Ui {
      * @return The formatted confirmation text.
      */
     public String formatAddTask(Task task, TaskList taskList) {
-        return "Got it. I've added this task:\n" + task.toString() + "\n" + formatTaskSize(taskList);
+        return "Whoosh! Got it. I've added this task:\n" + task.toString() + "\n" + formatTaskSize(taskList);
     }
 
     /**
@@ -97,7 +97,7 @@ public class Ui {
      * @return The formatted confirmation text.
      */
     public String formatDeleteTask(Task task, TaskList taskList) {
-        return "Noted. I've removed this task:\n" + task.toString() + "\n" + formatTaskSize(taskList);
+        return "Whoosh! I've removed this task:\n" + task.toString() + "\n" + formatTaskSize(taskList);
     }
 
     /**
@@ -107,7 +107,7 @@ public class Ui {
      * @return The formatted confirmation text.
      */
     public String formatMarkTask(Task task) {
-        return "Nice! I've marked this task as done:\n" + task.toString();
+        return "Whoosh! I've marked this task as done:\n" + task.toString();
     }
 
     /**
@@ -117,7 +117,7 @@ public class Ui {
      * @return The formatted confirmation text.
      */
     public String formatUnmarkTask(Task task) {
-        return "OK, I've marked this task as not done yet:\n" + task.toString();
+        return "Whoosh! I've marked this task as not done yet:\n" + task.toString();
     }
 
     /**
@@ -128,7 +128,7 @@ public class Ui {
      * @return The formatted task-count text.
      */
     public String formatTaskSize(TaskList taskList) {
-        return "Now you have " + taskList.getSize() + " tasks in the list.";
+        return "Whoosh! Now you have " + taskList.getSize() + " tasks in the list.";
     }
 
     /**
@@ -138,7 +138,7 @@ public class Ui {
      * @return The formatted confirmation text.
      */
     public String formatTasksLoaded(int taskCount) {
-        return "Successfully loaded " + taskCount + " tasks from file.";
+        return "Whoosh! Successfully loaded " + taskCount + " tasks from file.";
     }
 
     /**
@@ -148,7 +148,7 @@ public class Ui {
      * @return The formatted confirmation text.
      */
     public String formatTasksSaved(int taskCount) {
-        return "Successfully saved " + taskCount + " tasks to file.";
+        return "Whoosh! Successfully saved " + taskCount + " tasks to file.";
     }
 
     /**
