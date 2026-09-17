@@ -22,7 +22,7 @@ Nimbus is a **desktop chatbot for managing your tasks**, with a graphical chat-s
 
 ## Quick Start
 
-1. Ensure you have Java 17 or above installed on your computer.
+1. Ensure you have Java 25 or above installed on your computer.
 2. Download the latest `nimbus.jar` from the releases page.
 3. Copy the file to the folder you want to use as the home folder for Nimbus.
 4. Double-click the jar file (or run `java -jar nimbus.jar` from a terminal) to launch the GUI.
